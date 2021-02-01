@@ -192,7 +192,7 @@ def compressor(directory):
     with open(directory, "r") as file:
         text = file.read()
 
-        newtext = replacer(text) #MOET NOG ANDERS OM SPATIES EN ENTERS TE BEHOUDEN die niet aan begin regel staan
+        newtext = replacer(text) #Moet pas weghalen VOOR de eerste letter in een regel en NA een \n
 
         f = open("newtext.txt", "w+")
         f.write(newtext)

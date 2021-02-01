@@ -141,6 +141,18 @@ def sort(lijst):
 
 print(sort(lijst1))
 
+def gemiddelde(lijst):
+    totaal = 0
+    for i in range(len(lijst)):
+        totaal += lijst[i]
+
+    gem = totaal/len(lijst)
+
+    return(f"het gemiddelde is {gem}")
+
+print(gemiddelde(lijst1))
+
+
 from random import randint
 
 def getalrader():
@@ -164,3 +176,31 @@ def getalrader():
         return(f"inderdaad, het getal was {getal}")
 
 print(getalrader())
+"""
+def replacer(string):
+    replacing_dict = {
+        " " : "",
+        "\t" : "",
+        "\n" : ""
+    }
+
+    for search, replace in replacing_dict.items():
+        string = string.replace(search, replace)
+    return string
+
+def compressor(directory):
+    with open(directory, "r") as file:
+        text = file.read()
+
+        newtext = replacer(text)
+
+        f = open("newtext.txt", "w+")
+        f.write(newtext)
+        f.close()
+        return
+
+print(compressor("text.txt"))"""
+
+#def cycle():
+
+#def fibonacci():

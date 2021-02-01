@@ -176,7 +176,7 @@ def getalrader():
         return(f"inderdaad, het getal was {getal}")
 
 print(getalrader())
-"""
+
 def replacer(string):
     replacing_dict = {
         " " : "",
@@ -192,15 +192,28 @@ def compressor(directory):
     with open(directory, "r") as file:
         text = file.read()
 
-        newtext = replacer(text)
+        newtext = replacer(text) #MOET NOG ANDERS OM SPATIES EN ENTERS TE BEHOUDEN die niet aan begin regel staan
 
         f = open("newtext.txt", "w+")
         f.write(newtext)
         f.close()
         return
 
-print(compressor("text.txt"))"""
+print(compressor("text.txt"))
 
-#def cycle():
 
-#def fibonacci():
+
+def cycle(ch, n):
+    bits = [int(i) for i in str(ch)]
+    for j in range(len(bits)):
+        return ("".join([str(integer) for integer in (bits[n:]+bits[:n])]))
+
+
+print(cycle(1101001, 3))
+print(cycle(1101001, -3))
+print(cycle(1101001, 0))
+
+def fib_1(n, v0=0, v1=1):
+    return fib_1(n-1, v1, v0+v1) if n > 1 else (v0, v1) [n]
+
+print(fib_1(6))

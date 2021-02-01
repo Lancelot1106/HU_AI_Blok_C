@@ -5,8 +5,6 @@ print("welcome")
 
 def welcome():
     global gamestarted
-    global gamequit
-    global play
 
     while not gamestarted:
         upforgame = str(input("are you up for a game? (yes/no) ")).lower()
@@ -16,10 +14,10 @@ def welcome():
                 side = str(input("do you want to guess or make the code? (guess/code) ")).lower()
                 if side == "guess":
                     print("good luck, and enjoy")
-                    return (functie)
+                    return (playerguess())
                 elif side == "code":
                     print("good luck, and enjoy")
-                    return (functie)
+                    return (playercode())
                 elif side == "quit":
                     print("goodbye then")
                     return ("")
@@ -33,9 +31,10 @@ def welcome():
             print("please answer with yes or no")
             continue
 
-print(welcome())
 
-#def 
+
+def playercode():
+    print("succes")
 #player creates the code -->
 
     #speler creert code
@@ -51,6 +50,8 @@ print(welcome())
                     #terug naar begin loop
 
 
+def playerguess():
+    print("done")
 #player guesses the code -->
 
     #code = [randint(1, 6), randint(1,6), randint(1,6), randint(1,6)]
@@ -69,3 +70,4 @@ print(welcome())
 
                     #feedback, turncounter -1 en terug naar begin while
 
+print(welcome())

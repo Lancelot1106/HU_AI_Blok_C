@@ -205,8 +205,7 @@ print(compressor("text.txt"))
 
 def cycle(ch, n):
     bits = [int(i) for i in str(ch)]
-    for j in range(len(bits)):
-        return ("".join([str(integer) for integer in (bits[n:]+bits[:n])]))
+    return ("".join([str(integer) for integer in (bits[n:]+bits[:n])]))
 
 
 print(cycle(1101001, 3))
@@ -217,3 +216,29 @@ def fib_1(n, v0=0, v1=1):
     return fib_1(n-1, v1, v0+v1) if n > 1 else (v0, v1) [n]
 
 print(fib_1(6))
+
+def superGeheim():
+
+    tekst = str(input("Voer een tekst in: "))
+    rotatie = int(input("Voer een rotatie in: "))
+
+
+    #En(x) = (x+n) mod 26
+
+
+def FizzBuzz():
+    getal = int(input("Geef een getal: "))
+
+    if getal % 3 == 0 and getal % 5 == 0:
+        return('FizzBuzz')
+    elif getal % 3 == 0:
+        return('Fizz')
+    elif getal % 5 == 0:
+        return('Buzz')
+    else:
+        return(getal)
+
+print(FizzBuzz())
+print(FizzBuzz())
+print(FizzBuzz())
+print(FizzBuzz())

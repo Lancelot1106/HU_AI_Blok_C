@@ -140,3 +140,27 @@ def sort(lijst):
                 continue
 
 print(sort(lijst1))
+
+from random import randint
+
+def getalrader():
+    geraden = False
+    getal = randint(0, 10)
+    print(f"getal is {getal}")
+
+    while not geraden:
+        gok = int(input("Kies een geheel getal tussen 0 en 10: "))
+
+        if gok == getal:
+            geraden = True
+        elif gok > 10:
+            print("NIET BOVEN 10!!!")
+            continue
+        else:
+            print("dat was niet goed, probeer opnieuw")
+            continue
+
+    if geraden:
+        return(f"inderdaad, het getal was {getal}")
+
+print(getalrader())

@@ -223,7 +223,7 @@ def superGeheim():
     rotatie = int(input("Voer een rotatie in: "))
 
 
-    #En(x) = (x+n) mod 26
+    #En(x) = (x+n) mod ..
 
 
 def FizzBuzz():

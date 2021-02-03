@@ -1,0 +1,106 @@
+2.1
+
+a. wel propositie
+b. wel propositie
+c. wel propositie
+d. wel propositie
+e. niet propositie
+f. wel propositie
+g. niet propositie
+h. wel propositie
+i. wel propositie
+
+2.2
+
+a.
+    p: jan droomt
+    q: jan slaapt
+    p --> q
+
+b.
+    p: slapen
+    q: dromen
+    q --> p
+
+c.
+    p: drinken
+    q: dronken zijn
+    ¬p --> ¬q
+
+d.
+    p: dronken autorijden
+    q: boete
+    p --> q
+
+    (
+    p: dronken zijn
+    q: auto rijden
+    r: boete
+    (p /\ q) --> r
+    )
+
+e.
+    p: promilage onder specifieke waarde
+    q: boete
+    p <-> ¬q
+
+    (
+    p: dronken zijn
+    q: auto rijden
+    r: promilage onder bepaalde waarde
+    s: kans op boete
+    (p /\ q) --> (r \/ s)
+
+f.
+    p: dronken zijn
+    q: drugs gebruikt
+    r: auto rijden
+    s: weg onveilig
+    ((p \/ q) /\ r) --> q
+
+2.3
+    a: | p , q , r | ( p  /\  q )  /\  (( ¬q )  \/  r )
+         0 , 0 , 0 |   0  0   0    /0      1    1   0
+         0 , 0 , 1 |   0  0   0    /0      1    1   1
+         0 , 1 , 0 |   0  0   1    /0      0    0   0
+         0 , 1 , 1 |   0  0   1    /0      0    1   1
+         1 , 0 , 0 |   1  0   0    /0      1    1   0
+         1 , 0 , 1 |   1  0   0    /0      1    1   1
+         1 , 1 , 0 |   1  1   1    /0      0    0   0
+         1 , 1 , 1 |   1  1   1    /1      0    1   1
+
+    b: | p , q , r |  p  -->  ( q  \/  r )
+         0 , 0 , 0 |  0   /1    0  0   0
+         0 , 0 , 1 |  0   /1    0  1   1
+         0 , 1 , 0 |  0   /1    1  1   0
+         0 , 1 , 1 |  0   /1    1  1   1
+         1 , 0 , 0 |  1   /0    0  0   0
+         1 , 0 , 1 |  1   /1    0  1   1
+         1 , 1 , 0 |  1   /1    1  1   0
+         1 , 1 , 1 |  1   /1    1  1   1
+
+    c: | p , q |  ¬ ( ( ¬p )  ∨   ¬ ( ( ¬q )  ∨  ¬p ))
+         0 , 0 |  /0     1    1   0      1    1   1
+         0 , 1 |  /0     1    1   0      0    1   1
+         1 , 0 |  /1     0    0   0      1    1   0
+         1 , 1 |  /0     0    1   1      0    0   0
+
+    d: | p , q , r |  p  ↔  ( q  ↔  r )
+         0 , 0 , 0 |  0  /0    0  1  0
+         0 , 0 , 1 |  0  /1    0  0  1
+         0 , 1 , 0 |  0  /1    1  0  0
+         0 , 1 , 1 |  0  /0    1  1  1
+         1 , 0 , 0 |  1  /1    0  1  0
+         1 , 0 , 1 |  1  /0    0  0  1
+         1 , 1 , 0 |  1  /0    1  0  0
+         1 , 1 , 1 |  1  /1    1  1  1
+
+    e: | p , q |  p  ↔  ( q  ↔  p )
+         0 , 0 |  0  /0   0  1  0
+         0 , 1 |  0  /1   1  0  0
+         1 , 0 |  1  /0   0  0  1
+         1 , 1 |  1  /1   1  1  1
+
+
+    (/x is het uiteindelijk 'berekende' getal)
+

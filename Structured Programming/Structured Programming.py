@@ -119,6 +119,7 @@ def palindroom(string):
 
 print(palindroom("racecar"))
 print(palindroom("racekar"))
+print(palindroom("raalegovogelaar"))
 
 is_sorted = lambda l: all(l[i] <= l[i+1] for i in range(len(l)-1))
 
@@ -177,6 +178,7 @@ def getalrader():
 
 print(getalrader())
 
+"""
 def replacer(string):
     replacing_dict = {
         " " : "",
@@ -189,18 +191,37 @@ def replacer(string):
     return string
 
 def compressor(directory):
+    sentencelist = []
+    newline = False
+    line = ""
+
     with open(directory, "r") as file:
         text = file.read()
 
-        newtext = replacer(text) #Moet pas weghalen VOOR de eerste letter in een regel en NA een \n
+        for teken in text:
+            while newline == False:
+                if text[teken].isalnum():  #indices must be integers
+                    newline = True
+                else:
+                    continue
+            while newline == True:
+                if teken != "\\"      #gaat niet werken, teken != index dus kan niet volgende teken ophalen
+                    line = line + teken
+                else:
+                    line = line + teken
+                    newline = False
 
+    #    newtext = replacer(text) #Moet weghalen: na \n alle \n, spaties en tabs tot de eerste teken [a-z][A-Z][0-9], ipv zoals nu alle spaties etc
+
+
+        #maakt een tekstbestand en schrijft de tekst
         f = open("newtext.txt", "w+")
         f.write(newtext)
         f.close()
         return
 
 print(compressor("text.txt"))
-
+"""
 
 
 def cycle(ch, n):
@@ -211,20 +232,42 @@ def cycle(ch, n):
 print(cycle(1101001, 3))
 print(cycle(1101001, -3))
 print(cycle(1101001, 0))
+print(cycle(11101011000010110011010101100011101111001010010101, 15))
 
 def fib_1(n, v0=0, v1=1):
     return fib_1(n-1, v1, v0+v1) if n > 1 else (v0, v1) [n]
 
 print(fib_1(6))
 
-def superGeheim():
+def superGeheim(text, r):
 
-    tekst = str(input("Voer een tekst in: "))
-    rotatie = int(input("Voer een rotatie in: "))
+    abc = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+    DEF = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+    newtext = ""
+
+    #text = str(input("Voer een tekst in: "))
+    #r = int(input("Voer een rotatie in: "))
+
+    rabc = (abc[r:]+abc[:r])
+    rabcdict = dict(zip(abc, rabc))
+    rDEF = (DEF[r:]+DEF[:r])
+    rDEFdict = dict(zip(DEF, rDEF))
+
+    for i in text:
+        if i in abc:
+            l = rabcdict[i]
+            newtext += l
+        elif i in DEF:
+            l = rDEFdict[i]
+            newtext += l
+        else:
+            newtext += i
+
+    return (newtext)
 
 
-    #En(x) = (x+n) mod ..
-
+print(superGeheim("nzzvy://ccc.euazahk.ius/cgzin?b=jWc4c9CmDiW", -6))
+print(superGeheim("dit is een tekst", 12))
 
 def FizzBuzz():
     getal = int(input("Geef een getal: "))

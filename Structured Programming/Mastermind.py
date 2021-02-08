@@ -170,24 +170,32 @@ def Playerfeedback(code):
 """Systeem om alle keuzes in een lijst te hebben, en de volgende mogelijke combinaties toevoegen aan een nieuwe lijst"""
 
 #nieuw hoogstwaarschijnlijk beter systeem
-#def producttolist(): #could be used if stuff is used multiple times exactly the same
+
+def resulttolist(result): #could be used if stuff is used multiple times exactly the same
+
+    newlist = []
+    tuples = []
+
+    for i in result:
+        tuples.append(i)
+
+    for i in tuples:
+        j = "".join(i)
+        newlist.append(j)
+
+    return newlist
 
 def Allcombos(): #creates a starting list of all possible combinations
 
     global allcombos
 
     allcombos = []
-    tuples = []
 
     results = product("ABCDEF", repeat=4)
-    for i in results:
-        tuples.append(i)
 
-    for i in tuples:
-        j = "".join(i)
-        allcombos.append(j)
+    allcombos = resulttolist(results)
 
-    return AIguessing(allcombos)
+    return allcombos
 
 
 def AIguessing(list):
@@ -223,27 +231,38 @@ def NewFeedbackSystem(guess, feedback):
         if feedback == 4: #needs a fix
             #takes all letters in the code and checks for possible new combinations, adds them to the list
             results = permutations(f"{Color1}{Color2}{Color3}{Color4}", 4)
-            for i in results:
-                tuples.append(i)
 
-            for i in tuples:
-                j = "".join(i)
-                newcombos.append(j)
+            newcombos = resulttolist(results)
 
             newcombos = [item for item in newcombos if item not in usedcombos]
             return newcombos
 
         elif feedback == 3:
             #takes all letters in the code and checks for possible new combinations with >= 3 from previous code, adds them to the list
-            continue
+            results = combinations(guess, 3)
+
+            newresult = resulttolist(results)
+
+            #newcombos = [item for item in newcombos if item not in usedcombos]
+            return newcombos
+
         elif feedback == 2:
             #takes all letters in the code and checks for possible new combinations with >= 2 from previous code, adds them to the list
-            continue
+            results = combinations(guess, 2)
+
+            newresult = resulttolist(results)
+
+            #newcombos = [item for item in newcombos if item not in usedcombos]
+            return newcombos
+
         elif feedback == 1:
             #takes all letters in the code and checks for possible new combinations with >= 1 from previous code, adds them to the list
-            for j in range(len(guess)):
-                
-                return AIguessing(newcombos)
+            results = combinations(guess, 1)
+
+            newresult = resulttolist(results)
+
+            #newcombos = [item for item in newcombos if item not in usedcombos]
+            return newcombos
         else:
             #takes all letters in the code and checks for possible new combinations WITHOUT these letters, adds them to the list
             newletterlist = [item for item in letters if item not in guess] #creates a new list with letters that weren't used
@@ -251,18 +270,12 @@ def NewFeedbackSystem(guess, feedback):
             print(newletters)
 
             results = product(newletters, repeat=4)
-            for i in results:
-                tuples.append(i)
-
-            for i in tuples:
-                j = "".join(i)
-                newcombos.append(j)
+            newcombos = resulttolist(results)
 
             newcombos = [item for item in newcombos if item not in usedcombos]
             return newcombos
 
-print(NewFeedbackSystem("ABCD", 4))
-print(NewFeedbackSystem("AABB", 0))
+
 
 
 

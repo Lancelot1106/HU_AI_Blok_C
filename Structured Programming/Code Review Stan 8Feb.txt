@@ -1,0 +1,15 @@
++   Punten
+    -	Goede string check bij invoer kleuren
+    -	Feedback
+    -	Choice() functie gebruiken
+    -	Variabelen mooi bovenaan de functie aangemaakt voor duidelijkheid
+
++ - Verbeterpunten
+    -	Check even op ongebruikte variabelen
+    -	Code beter opdelen voor meer overzicht
+    -	Bug bij het terug geven van de feedback op de ingevoerde ‘Vraag’
+    -	Je heb een gamestarted variabele om je while loop te stoppen. Maar op de punten dat je de while loop wil stoppen maak je hier geen gebruik van. De variabele kan dus weg of maak er gebruik van bij line 45.
+    -	De forloop om de items eerst naar de lijst tuples te schrijven is overbodig. Deze stap kan je weghalen en dan krijg je hetzelfde resultaat
+    -	Bij AI guessing is hetzelfde als bij de eerste gameloop. Je maakt gebruik van een variabele om de while loop te starten maar verder niet.
+    -	Ook bij AIguessing heb je niet opgevangen wat er gebeurd als de user een string zou vullen, dus dan loopt het programma vast.
+    -	Je gebruikt een loop om ergens dan 1 keer doorheen te lopen dit is natuurlijk niet nodig.

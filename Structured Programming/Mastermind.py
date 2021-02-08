@@ -171,7 +171,7 @@ def Playerfeedback(code):
 
 #nieuw hoogstwaarschijnlijk beter systeem
 
-def resulttolist(result): #could be used if stuff is used multiple times exactly the same
+def resulttolist(result): #turns a result from itertools into a list
 
     newlist = []
     tuples = []
@@ -231,47 +231,49 @@ def NewFeedbackSystem(guess, feedback):
         if feedback == 4: #needs a fix
             #takes all letters in the code and checks for possible new combinations, adds them to the list
             results = permutations(f"{Color1}{Color2}{Color3}{Color4}", 4)
-
             newcombos = resulttolist(results)
-
             newcombos = [item for item in newcombos if item not in usedcombos]
             return newcombos
 
         elif feedback == 3:
             #takes all letters in the code and checks for possible new combinations with >= 3 from previous code, adds them to the list
             results = combinations(guess, 3)
-
             newresult = resulttolist(results)
-
-            #newcombos = [item for item in newcombos if item not in usedcombos]
-            return newcombos
+            print(newresult)
+            for i in range(len(newresult)):
+                combos = product(guess[i], repeat=4)
+                newcombos = resulttolist(combos)
+                newcombos = [item for item in newcombos if item not in usedcombos]
+                return newcombos
 
         elif feedback == 2:
             #takes all letters in the code and checks for possible new combinations with >= 2 from previous code, adds them to the list
             results = combinations(guess, 2)
-
             newresult = resulttolist(results)
-
-            #newcombos = [item for item in newcombos if item not in usedcombos]
-            return newcombos
+            print(newresult)
+            for i in range(len(newresult)):
+                combos = product(guess[i], repeat=4)
+                newcombos = resulttolist(combos)
+                newcombos = [item for item in newcombos if item not in usedcombos]
+                return newcombos
 
         elif feedback == 1:
             #takes all letters in the code and checks for possible new combinations with >= 1 from previous code, adds them to the list
             results = combinations(guess, 1)
-
             newresult = resulttolist(results)
-
-            #newcombos = [item for item in newcombos if item not in usedcombos]
-            return newcombos
+            print(newresult)
+            for i in range(len(newresult)):
+                combos = product(guess[i], repeat=4)
+                newcombos = resulttolist(combos)
+                newcombos = [item for item in newcombos if item not in usedcombos]
+                return newcombos
         else:
             #takes all letters in the code and checks for possible new combinations WITHOUT these letters, adds them to the list
             newletterlist = [item for item in letters if item not in guess] #creates a new list with letters that weren't used
             newletters = "".join(newletterlist)
             print(newletters)
-
             results = product(newletters, repeat=4)
             newcombos = resulttolist(results)
-
             newcombos = [item for item in newcombos if item not in usedcombos]
             return newcombos
 

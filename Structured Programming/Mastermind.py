@@ -142,7 +142,7 @@ def Playerfeedback(code):
 
             else:
                 codecut = list(dict.fromkeys(code)) #removes duplicate numbers to create equal chances in the random
-                """could be better"""
+                could be better
                 if goedgoed + goedfout == 1:
                     choicelist.append(codecut[i])
                     feedbackgiven = False

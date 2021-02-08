@@ -54,7 +54,7 @@ def welcome():
             continue
 
 
-"""____________________________________________________________________________________________________"""
+"""____________________________________________________________________________________________________
 
 def playercode():
     codepicked = False
@@ -163,7 +163,7 @@ def Playerfeedback(code):
     if soclose == True:
         return AIturn(choice(choicelist), choice(choicelist), choice(choicelist), choice(choicelist))
 
-"""_____________________________________________________________________________________________________________"""
+_____________________________________________________________________________________________________________"""
 
 
 
@@ -195,13 +195,14 @@ def Allcombos(): #creates a starting list of all possible combinations
 
     allcombos = resulttolist(results)
 
-    return allcombos
+    return AIguessing(allcombos)
 
 
 def AIguessing(list):
 
     AIguess = choice(list)
 
+    print()
     while not feedbackgiven: #makes sure you can't give feedback bigger >= 5
         correct = int(input("Write down how many colors are in the right spot: "))
         semicorrect = int(input("Write down how many colors are correct but not in the right spot: "))

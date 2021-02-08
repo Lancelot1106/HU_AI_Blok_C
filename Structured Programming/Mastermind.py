@@ -54,6 +54,7 @@ def welcome():
             continue
 
 
+"""____________________________________________________________________________________________________"""
 
 def playercode():
     codepicked = False
@@ -162,7 +163,7 @@ def Playerfeedback(code):
     if soclose == True:
         return AIturn(choice(choicelist), choice(choicelist), choice(choicelist), choice(choicelist))
 
-
+"""_____________________________________________________________________________________________________________"""
 
 
 
@@ -240,9 +241,9 @@ def NewFeedbackSystem(guess, feedback):
             continue
         elif feedback == 1:
             #takes all letters in the code and checks for possible new combinations with >= 1 from previous code, adds them to the list
-
-
-            return AIguessing(newcombos)
+            for j in range(len(guess)):
+                
+                return AIguessing(newcombos)
         else:
             #takes all letters in the code and checks for possible new combinations WITHOUT these letters, adds them to the list
             newletterlist = [item for item in letters if item not in guess] #creates a new list with letters that weren't used

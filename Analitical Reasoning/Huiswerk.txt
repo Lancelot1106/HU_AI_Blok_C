@@ -104,3 +104,87 @@ f.
 
     (/x is het uiteindelijk 'berekende' getal)
 
+2.4
+
+
+2.5
+    b: (e /\ h) <-> b en ((e /\ h) /\ b) \/ (¬(e /\ h) /\ ¬b)
+            p = (e /\ h)
+            q = b
+            p <-> q en (p /\ q) \/ (¬p /\ ¬q)
+
+            (e /\ h) <-> b <=> ((e /\ h) /\ b) \/ (¬(e /\ h) /\ ¬b)  -- Stelling 2.3.2: 4
+
+    c: (a ∨ (b → a)) → z en (a → z) ∧ ((b → a) → z)
+            p = a
+            q = (b -> a)
+            r = z
+            (p \/ q) --> r en (p --> r) /\ (q --> r)
+
+            (a ∨ (b → a)) → z <=> (a → z) ∧ ((b → a) → z)  -- Stelling 2.3.2: 13
+
+    d: (p ∧ ¬e) ∨ (¬e → q) en (¬e → q) ∨ (p ∧ ¬e)
+
+            (p ∧ ¬e) ∨ (¬e → q) <=> (¬e → q) ∨ (p ∧ ¬e)  -- Stelling 2.3.2: 2
+
+    e: a ↔ (b → a) en a ↔ (¬a → ¬b)
+            p <-> q en p <-> -q
+
+            a ↔ (b → a) <=> a ↔ (¬a → ¬b)  -- Stelling 2.3.2:
+
+    f: (h ∧ (f ∨ z)) → q en h → ((f ∨ z) → q)
+            (p /\ q) -> r en p -> (q -> r)
+
+            (h ∧ (f ∨ z)) → q <=> h → ((f ∨ z) → q)  -- Stelling 2.3.2: 15
+
+    g: ¬(p ↔ q) ∨ ¬z en ¬((p ↔ q) ∧ z)
+            -p \/ -q en -(p /\ q)
+
+            ¬(p ↔ q) ∨ ¬z <=> ¬((p ↔ q) ∧ z)  -- Stelling 2.3.2: 10
+
+    h: q → ¬¬(h ↔ z) en q → (h ↔ z)
+            p -> --q en p -> q
+
+            q → ¬¬(h ↔ z) <=> q → (h ↔ z)  -- Stelling 2.3.2: 1
+
+2.6
+    b: z ∧ ((q → e) ∨ (q → e)) en (q → e) ∧ z
+            stel p: (q -> e)
+            z /\ (p \/ p) en p/\z
+            p \/ p <=> p -- Stelling 2.3.2:1
+            z /\ p en p /\ z -- Stelling 2.3.2:3
+            dus z /\ ((q -> e) \/ (q -> e)) <=> (q -> e) /\ z
+
+    c: ¬(m /\ h) en m --> ¬h
+            stel p: m en q: h
+            ¬(p /\ q) <=> ¬p \/ ¬q   -- Stelling 2.3.2:10
+
+
+
+            dus ¬(m /\ h) <=> m --> ¬h
+
+    d: (n \/ r) --> (p /\ r) en ((n \/ r) --> p) /\ (¬r --> ¬(n \/ r))
+            stel q: (n \/ r)
+            q -> (p /\ r) en (q -> p) /\ (¬r -> ¬q)
+            q -> (p /\ r) <=> (q -> p) /\ (q -> r)      -- Stelling 2.3.2:14
+            (q -> r) <=> (¬r -> ¬q)     -- Stelling 2.3.2:7
+            dus q -> (p /\ r) <=> (q -> p) /\ (¬r -> ¬q)
+            dus (n \/ r) --> (p /\ r) <=> ((n \/ r) --> p) /\ (¬r --> ¬(n \/ r))
+
+    e: ¬(¬a --> z) en ¬a /\ ¬(¬z --> z)
+
+            ¬(¬a --> z) en ¬a /\ ¬(¬z --> z)   -- Stelling 2.3.2:
+
+    f: ¬(p --> q) \/ (¬(q --> p) \/ r) en ¬(p <-> q) \/ r
+
+            ¬(p --> q) \/ (¬(q --> p) \/ r) en ¬(p <-> q) \/ r   -- Stelling 2.3.2:
+
+    g: (z \/ k) --> m en (¬z \/ m) /\ (-k \/ m)
+
+            (z \/ k) --> m en (¬z \/ m) /\ (-k \/ m)   -- Stelling 2.3.2:
+
+    h: c /\ (h <-> d) en ¬(c --> ¬(d <-> h))
+
+            c /\ (h <-> d) en ¬(c --> ¬(d <-> h))   -- Stelling 2.3.2:
+
+

@@ -34,7 +34,6 @@ def zinvergelijker(zin1, zin2):
             continue
         else:
             return(f"Het eerste verschil zit op index: {i}")
-            break
 
 print(zinvergelijker("dit is een zin", "dit is nog een zin"))
 

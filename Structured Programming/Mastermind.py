@@ -3,17 +3,17 @@ from itertools import *
 
 
 gamestarted = False
-first = True
 feedbackgiven = False
 soclose = False
+all_right = False
 
 allnums = [1, 2, 3, 4, 5, 6]
 choicelist = []
 colorcode = []
 notnum = []
 allcombos = []
-newcombos = []
 usedcombos = []
+Code = []
 
 print("welcome")
 
@@ -38,7 +38,7 @@ def welcome():
 
                     #might want to add some form of AI selection (simple/etc/etc)
 
-                    return (playercode())
+                    return (CreateCode())
 
                 elif side == "quit":
                     print("goodbye then")
@@ -54,138 +54,74 @@ def welcome():
             continue
 
 
-"""____________________________________________________________________________________________________
-
-def playercode():
-    codepicked = False
-    colors = ["black", "white", "red", "green", "yellow", "blue"]
-    global colorcode
-
-#player creates the code -->
-    while not codepicked:
-        print("The possible colors for a code are: Red, Blue, Yellow, Green, Black and White")
-        colorcode = ((str(input("Choose the colors of your code: "))).lower()).split(", ")
-
-        #check if the right colors are used
-        for i in range(len(colorcode)):
-            if colorcode[i] in colors:
-                continue
-            else:
-                print("please use a valid color")
 
 
-        codepicked = True
+def resulttolist(result, feedback = 0):
 
-    return AIturn(randint(1, 6), randint(1, 6), randint(1, 6), randint(1, 6))
-
-def AIturn(Color1, Color2, Color3, Color4):
-
-
-    global first
-    global choicelist
-    global allnums
-    global colorcode
-    global notnum
-
-    print(first)
-
-    while not first:
-        if soclose == True: #if feedback was 4
-            nextguess = [Color1, Color2, Color3, Color4]
-        else: #if feedback wasn't 4
-            nextguess = [Color1, Color2, Color3, Color4]
-            print(f"now the AI guessed: {nextguess}")
-            choicelist = choicelist.clear() #clearing the list so there won't be any duplicates affecting random chances
-        return Playerturn(nextguess)
-    while first: #first completely random guess
-        firstguess = [Color1, Color2, Color3, Color4]
-        first = False
-        print(f"AI guessed: {firstguess}")
-        return Playerfeedback(firstguess)
-
-def Playerfeedback(code):
-
-    global feedbackgiven
-    global choicelist
-    global allnums
-    global soclose
-    global notnum
-
-    if code == colorcode: #doesn't work yet, cuz int != string
-        return ("the AI wins")
-
-    while not feedbackgiven: #makes sure you can't give feedback bigger >= 5
-        goedgoed = int(input("Write down how many colors are in the right spot: "))
-        goedfout = int(input("Write down how many colors are correct but not in the right spot: "))
-        if goedgoed + goedfout <= 4:
-            feedback = (goedgoed, goedfout)
-            print(feedback)
-            feedbackgiven = True
-        else:
-            print("please use numbers 1-4 where the total <= 4")
-
-
-    if soclose == False: #if the feedbacks hasn't been 4 before
-        for i in range(1):
-            print(i)
-            if goedgoed + goedfout == 4: #cuts the loop, making sure only the current colors can be chosen
-                choicelist.append(code[i])
-                choicelist.append(code[i+1])
-                choicelist.append(code[i+2])
-                choicelist.append(code[i+3])
-                soclose = True
-                return AIturn(choice(choicelist), choice(choicelist), choice(choicelist), choice(choicelist))
-
-            elif feedback == (0,0): #throws away all numbers used in the code ##needs something extra to not let those numbers get back into the list
-                choicelist = [item for item in allnums if item not in code]
-                notnum = allnums - choicelist
-
-            else:
-                codecut = list(dict.fromkeys(code)) #removes duplicate numbers to create equal chances in the random
-                could be better
-                if goedgoed + goedfout == 1:
-                    choicelist.append(codecut[i])
-                    feedbackgiven = False
-                    return AIturn(randint(1,6), randint(1,6), randint(1,6), choice(choicelist))
-                if goedgoed + goedfout == 2:
-                    choicelist.append(codecut[i])
-                    choicelist.append(codecut[i + 1])
-                    feedbackgiven = False
-                    return AIturn(randint(1, 6), randint(1,6), choice(choicelist), choice(choicelist))
-                if goedgoed + goedfout == 3:
-                    choicelist.append(codecut[i])
-                    choicelist.append(codecut[i + 1])
-                    choicelist.append(codecut[i + 2])
-                    feedbackgiven = False
-                    return AIturn(randint(1, 6), choice(choicelist), choice(choicelist), choice(choicelist))
-
-
-    if soclose == True:
-        return AIturn(choice(choicelist), choice(choicelist), choice(choicelist), choice(choicelist))
-
-_____________________________________________________________________________________________________________"""
-
-
-
-"""Systeem om alle keuzes in een lijst te hebben, en de volgende mogelijke combinaties toevoegen aan een nieuwe lijst"""
-
-#nieuw hoogstwaarschijnlijk beter systeem
-
-def resulttolist(result): #turns a result from itertools into a list
+    """turns a result from a calculation with itertools into a list and returns it"""
 
     newlist = []
-    tuples = []
 
-    for i in result:
-        tuples.append(i)
-
-    for i in tuples:
-        j = "".join(i)
-        newlist.append(j)
+    if feedback == 2:
+        for i in result:
+            j = " ".join(i)
+            k = list(j.split(" "))
+            newlist.append(k)
+    elif feedback == 3:
+        for i in result:
+            j = " ".join(i)
+            k = list(j.split(" "))
+            newlist.append(k)
+    else:
+        for i in result:
+            j = "".join(i)
+            newlist.append(j)
 
     return newlist
 
-def Allcombos(): #creates a starting list of all possible combinations
+
+
+def compareWithAll(lijst, previouslist, feedback = 0):
+
+    """creates a list with options, takes out previously attempted guesses and compared to the code impossible guesses, resulting in less options to choose"""
+
+    global usedcombos
+
+    results = []
+
+
+    if feedback == 2: #to make sure there's a 2 letter combination with gaps
+        for i in previouslist:
+            for letter1, letter2 in lijst:
+                if letter1 in i and letter2 in i:
+                    results.append(i)
+
+    elif feedback == 3: #to make sure there's a 3 letter combination with gaps
+        for i in previouslist:
+            for letter1, letter2, letter3 in lijst:
+                if letter1 in i and letter2 in i and letter3 in i:
+                    results.append(i)
+    else:
+        for i in previouslist:
+
+            for j in range(len(lijst)):
+
+                if lijst[j] in i:
+
+                    results.append(i)
+
+    results = [item for item in results if item not in usedcombos]
+    results = list(dict.fromkeys(results))
+
+    print(f"It seems I only {len(results)} options left!")
+
+    return AIguessing(results)
+
+
+
+def Allcombos():
+
+    """creates a list with all 1269 options for the AI to choose from the first time around"""
 
     global allcombos
 
@@ -198,85 +134,156 @@ def Allcombos(): #creates a starting list of all possible combinations
     return AIguessing(allcombos)
 
 
-def AIguessing(list):
 
-    AIguess = choice(list)
+def CreateCode():
 
-    print()
-    while not feedbackgiven: #makes sure you can't give feedback bigger >= 5
+    """Code creator, currently uses ABCDEF instead of colors, which will be added later including the check"""
+
+    global Code
+
+    colors = ["black", "white", "red", "green", "yellow", "blue"]
+    codepicked = False
+
+    print("good to see you")
+    print("want to test the limits of my knowledge?")
+
+    while not codepicked:
+        #print("The possible colors for a code are: Red, Blue, Yellow, Green, Black and White")
+        Code = (str(input("Choose the colors (letters) for your code: ")))
+
+        return Allcombos()
+
+
+
+def AIguessing(lijst):
+
+    """AI picks a random option from the list, presents it to the player who will give feedback on the code. Includes a simple check for false feedback (if more than 5 'pins')"""
+
+    global Code
+    global allcombos
+
+
+    AIguess = choice(lijst)
+
+    print(f"The original code was {Code}")
+    print(f"my guess this time is {AIguess}, how did I do?")
+    while not feedbackgiven:
         correct = int(input("Write down how many colors are in the right spot: "))
         semicorrect = int(input("Write down how many colors are correct but not in the right spot: "))
 
         feedback = correct + semicorrect
         if feedback <= 4:
-            return NewFeedbackSystem(AIguess, feedback)
+            return NewFeedbackSystem(AIguess, correct, semicorrect, lijst)
         else:
             print("please use numbers 1-4 where the total <= 4")
+            continue
 
-def NewFeedbackSystem(guess, feedback):
+
+
+def NewFeedbackSystem(guess, correct, semicorrect, lijst):
+
+    """Creme de la creme, this system checks the amount of feedback given and creates a list with the possible options according to that feedback"""
 
     global allcombos
-    global newcombos
     global usedcombos
-    letters = ["A", "B", "C", "D", "E", "F"]
-    tuples = []
+    global all_right
 
-    newcombos.clear()
 
-    for i in range(1):
-        Color1 = guess[i]
-        Color2 = guess[i+1]
-        Color3 = guess[i+2]
-        Color4 = guess[i+3]
+    feedback = correct + semicorrect
 
-        if feedback == 4: #needs a fix
-            #takes all letters in the code and checks for possible new combinations, adds them to the list
-            results = permutations(f"{Color1}{Color2}{Color3}{Color4}", 4)
+    usedcombos.append(guess)
+
+    if not allright: #needs an extra way to AT LEAST get the same feedback as previous one
+
+        if feedback == 4: #takes all letters in the code and checks for possible new combinations, adds them to the list
+            for j in range(1):
+                A = guess[j]
+                B = guess[j + 1]
+                C = guess[j + 2]
+                D = guess[j + 3]
+
+            results = permutations(f"{A}{B}{C}{D}", 4)
             newcombos = resulttolist(results)
             newcombos = [item for item in newcombos if item not in usedcombos]
-            return newcombos
 
-        elif feedback == 3:
-            #takes all letters in the code and checks for possible new combinations with >= 3 from previous code, adds them to the list
-            results = combinations(guess, 3)
-            newresult = resulttolist(results)
-            print(newresult)
-            for i in range(len(newresult)):
-                combos = product(guess[i], repeat=4)
-                newcombos = resulttolist(combos)
-                newcombos = [item for item in newcombos if item not in usedcombos]
-                return newcombos
+            all_right = True
+            return AIguessing(newcombos)
+
+        elif feedback == 3: #takes all letters in the code and checks for possible new combinations with >= 3 from previous code, adds them to the list
+            results = permutations(guess, 3)
+            newresult = resulttolist(results, feedback)
+
+            return compareWithAll(newresult, lijst, feedback)
 
         elif feedback == 2:
             #takes all letters in the code and checks for possible new combinations with >= 2 from previous code, adds them to the list
-            results = combinations(guess, 2)
-            newresult = resulttolist(results)
-            print(newresult)
-            for i in range(len(newresult)):
-                combos = product(guess[i], repeat=4)
-                newcombos = resulttolist(combos)
-                newcombos = [item for item in newcombos if item not in usedcombos]
-                return newcombos
+            results = permutations(guess, 2)
+            newresult = resulttolist(results, feedback)
+
+            return compareWithAll(newresult, lijst, feedback)
 
         elif feedback == 1:
             #takes all letters in the code and checks for possible new combinations with >= 1 from previous code, adds them to the list
             results = combinations(guess, 1)
-            newresult = resulttolist(results)
-            print(newresult)
-            for i in range(len(newresult)):
-                combos = product(guess[i], repeat=4)
-                newcombos = resulttolist(combos)
-                newcombos = [item for item in newcombos if item not in usedcombos]
-                return newcombos
+            newresult = list(dict.fromkeys(resulttolist(results)))
+
+
+            return compareWithAll(newresult, lijst)
+
         else:
             #takes all letters in the code and checks for possible new combinations WITHOUT these letters, adds them to the list
             newletterlist = [item for item in letters if item not in guess] #creates a new list with letters that weren't used
             newletters = "".join(newletterlist)
-            print(newletters)
+
             results = product(newletters, repeat=4)
             newcombos = resulttolist(results)
             newcombos = [item for item in newcombos if item not in usedcombos]
-            return newcombos
+
+            return AIguessing(newcombos)
+
+    else: #if all letters were guessed correctly
+
+        if correct == 4:
+            return ("Well played Human, but I win this time")
+
+        elif correct == 2: #in a 2,2 case, checks which combinations are possible while keeping 2 on the same spot each time
+
+            results = permutations(guess, 2)
+            newresult = resulttolist(results, feedback)
+
+            return compareWithAll(newresult, lijst, feedback)
+
+        elif correct == 1: #in a 1,3 case, creates a list with still possible combinations (since there'll be only 8, it's hardcoded in here)
+            for j in range(1):
+                A = guess[j]
+                B = guess[j + 1]
+                C = guess[j + 2]
+                D = guess[j + 3]
+
+                newcombos = [f"{A}{C}{D}{B}", f"{A}{D}{B}{C}", f"{C}{B}{D}{A}", f"{D}{B}{A}{C}", f"{B}{D}{C}{A}", f"{D}{A}{C}{B}", f"{B}{C}{A}{D}", f"{C}{A}{B}{D}"]
+                newcombos = [item for item in newcombos if item not in usedcombos]
+
+                return AIguessing(newcombos)
+
+        else:
+            for j in range(1):
+                A = guess[j]
+                B = guess[j + 1]
+                C = guess[j + 2]
+                D = guess[j + 3]
+
+            results = permutations(f"{A}{B}{C}{D}", 4)
+            newcombos = resulttolist(results)
+            newcombos = [item for item in newcombos if item not in usedcombos]
+
+            return AIguessing(newcombos)
+
+
+
+
+
+
+
 
 
 
@@ -313,7 +320,8 @@ def playerguess():
 
 
         while guessentered:
-            codeExtra = code
+            codeExtra = code.copy()
+            usedcolors = []
 
             for i in range(len(guess)):
 
@@ -351,6 +359,6 @@ def playerguess():
 
 
 
-#print(NewFeedbackSystem())
+print(welcome())
 
 

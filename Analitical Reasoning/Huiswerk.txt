@@ -188,3 +188,161 @@ f.
             c /\ (h <-> d) en ¬(c --> ¬(d <-> h))   -- Stelling 2.3.2:
 
 
+
+2.7
+    13: (p \/ q) -> r en (p -> r) /\ (q -> r)
+
+        (p \/ q) -> r
+        -(p \/ q) \/ r          -- regel 7
+        (-p /\ -q) \/ r         -- regel 5
+        (-p \/ r) /\ (-q \/ r)  -- regel 12
+        (p -> r) /\ (q -> r)    -- regel 7
+
+        dus (p \/ q) -> r <=> (p -> r) /\ (q -> r)
+
+    14: p -> (q /\ r) en (p -> q) /\ (p -> r)
+
+        p -> (q /\ r)
+        -p \/ (q /\ r)          -- regel 7
+        (q /\ r) \/ -p          -- regel 2
+        (q \/ -p) /\ (r \/ -p)  -- regel 12
+        (-p \/ q) /\ (-p \/ r)  -- regel 2
+        (p -> q) /\ (p -> r)    -- regel 7
+
+        dus p -> (q /\ r) <=> (p -> q) /\ (p -> r)
+
+    15: p -> (q -> r) en (p /\ q) -> r
+
+        p -> (q -> r)
+        p -> (-q \/ r)      -- regel 7
+        -p \/ (-q \/ r)     -- regel 7
+        (-p \/ -q) \/ r     -- regel 5
+        -(p \/ q) \/ r      -- regel 10
+        (p /\ q) -> r       -- regel 7
+
+2.8
+    a:  a <-> b en -a <-> -b
+
+        a <-> b
+        (a -> b) /\ (b -> a)     -- regel 4
+        (-b -> -a) /\ (-a -> -b) -- regel 7 (x2)
+        -a <-> -b                -- regel 4
+
+        dus a <-> b <=> -a <-> -b
+
+    b:  (-a /\ -b) -> c en -a -> (b \/ c)
+
+        -a -> (-b -> r)          -- regel 15
+        -a -> (-(-b) \/ c)       -- regel 7
+        -a -> (b \/ c)           -- regel 1
+
+2.9
+    b:  -(p -> -(q -> q))
+
+        <=> p /\ --(q -> q)     -- regel 8
+        <=> p /\ (q -> q)       -- regel 1
+            (q -> q)
+             0    0 resulteert in 1
+             1    1 resulteert in 1
+             dus q -> q is tautologie (-- regel 7, -- regel 16)
+        dus
+        <=> p /\ T
+        <=> p
+
+    c:  -((-p -> q) -> ((p -> -r) /\ (r -> q)))
+
+        <=> (-p -> q) /\ -((p -> -r) /\ (r -> q))       -- regel 8
+        <=> (-p -> q) /\ (-(p -> -r) \/ -(r -> q))      -- regel 10
+        <=> (p \/ q) /\ (-(p -> -r) \/ -(r -> q))       -- regel 7
+        <=> (p \/ q) /\ ((p /\ -(-r)) \/ (r /\ -q))     -- regel 8
+        <=> (p \/ q) /\ ((p /\ r) \/ (-q /\ r))         -- regels 1 en 3
+        <=> (p \/ q) /\ ((p \/ -q) /\ r)                -- regel 11
+        <=> ((p \/ q) /\ (p \/ -q)) /\ r                -- regel 6
+        <=> (p \/ (q /\ -q)) /\ r                       -- regel 12
+        <=> p /\ r                                      -- regel 1
+
+2.10
+    a: altijd +
+    b: nooit +
+    c: soms +
+    d: nooit - altijd
+    e: altijd +
+    f: nooit - altijd
+    g: soms - altijd
+    h: nooit +
+    i: soms +
+
+
+
+Summatief Equivalentiebewijs
+
+    ((¬r -> q) -> ¬(r -> q)) -> p    en    p \/ q
+
+    we nemen:
+    ((¬r -> q) -> ¬(r -> q)) -> p
+
+    stel a = ((¬r -> q) -> ¬(r -> q))
+    dan:
+    a -> p
+    ¬a \/ p     -- Stelling 2.3.2:7
+    p \/ ¬a     -- Stelling 2.3.2:2
+
+    dus a moet uitkomen op ¬q
+
+    ga binnen a verder:
+    (¬r -> q) -> ¬(r -> q)
+
+    (¬r -> q) -> (r /\ ¬q)        -- Stelling 2.3.2:8
+    (¬(¬r) \/ q) -> (r /\ ¬q)     -- Stelling 2.3.2:7
+    (r \/ q) -> (r /\ ¬q)         -- Stelling 2.3.2:1
+    ¬(r \/ q) \/ (r /\ ¬q)        -- Stelling 2.3.2:7
+    (¬r /\ ¬q) \/ (r /\ ¬q)       -- Stelling 2.3.2:10
+    (¬r \/ r) /\ ¬q               -- Stelling 2.3.2:11
+    T /\ ¬q                       -- Stelling 2.3.2:16
+    -q                            -- Stelling 2.3.2:1
+
+    dus
+    p \/ ¬(¬q)
+    p \/ q                        -- Stelling 2.3.2:1
+
+    dus ((¬r -> q) -> ¬(r -> q)) -> p <=> p \/ q
+
+
+
+2.11
+    a:  p /\ q  <=> ¬(¬(p /\ q))    -- Stelling 2.3.2:1
+                <=> ¬(¬p \/ ¬q)     -- Stelling 2.3.2:9
+
+    b: ¬p       <=> ¬p \/ ⊥         -- Stelling 2.3.2:1
+                <=> p -> ⊥          -- Stelling 2.3.2:7
+
+
+2.12
+    a:  (p \/ q) /\ r   <=> (¬(¬p) \/ q) /\ r   -- Stelling 2.3.2:1
+                        <=> (¬p -> q) /\ r      -- Stelling 2.3.2:7
+                        <=> (¬p -> q) /\ ¬(¬r)  -- Stelling 2.3.2:1
+                        <=> ¬((¬p -> q) -> ¬r)  -- Stelling 2.3.2:8
+
+    b:  (p \/ q) /\ r   <=> (p /\ r) \/ (q /\ r)        -- Stelling 2.3.2:11
+                        <=> ¬¬((p /\ r) \/ (q /\ r))    -- Stelling 2.3.2:1
+                        <=> ¬(¬(p /\ r) \/ ¬(q /\ r))   -- Stelling 2.3.2:9
+                        <=> ¬((p ^ r) /\ (q ^ r))       -- Def ^
+                        <=> (p ^ r) ^ (q ^ r)           -- Def ^
+
+2.13
+    a:
+    bewijs '¬':
+            ¬p  <=> ¬(p \/ p)       -- Stelling 2.3.2:1
+                <=> p ↓ p           -- Quine Dagger
+
+    bewijs '/\':
+            p /\ q  <=> ¬(¬(p /\ q))    -- Stelling 2.3.2:1
+                    <=> ¬(¬p \/ ¬q)     -- Stelling 2.3.2:10
+                    <=> ¬p ↓ ¬q         -- Quine Dagger
+                    <=> (p ↓ p) ↓ (q ↓ q)   -- Quine Dagger '¬'
+
+    bewijs '\/'
+
+
+2.14
+    a: p -> (q -> r)
